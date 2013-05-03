@@ -30,8 +30,6 @@ MEMORY
 
 SECTIONS
 {
-#ifdef CONFIG_X86_HDBOOT
-
 	.ramlayout : {
 		boot_stack = INDIRECT_AREA;
 		indirect_area = INDIRECT_AREA;
@@ -125,8 +123,6 @@ SECTIONS
 		. = SECTOR_SIZE + 508;
 		LONG(0x00000000);	/* LBA start upper */
 	} > mbr
-
-#endif
 
 	_sdata = .;
 	.data : AT ( LOADADDR(.text) + SIZEOF(.text) ) {
