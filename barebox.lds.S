@@ -124,6 +124,30 @@ SECTIONS
 		LONG(0x00000000);	/* LBA start upper */
 	} > mbr
 
+	/* some real mode bootstrapping */
+	.bootstrapping : AT ( LOADADDR(.bootsector) + SIZEOF(.bootsector) ) {
+		*(.boot.head)
+		*(.boot.text*)
+		*(.boot.rodata*)
+		*(.boot.data*)
+		. = ALIGN(16);
+	} > barebox
+
+	.text : AT ( LOADADDR(.bootstrapping) + SIZEOF(.bootstrapping) ) {
+		/* do not align here! It may fails with the LOADADDR! */
+		_stext = .;
+		_text = .;
+		*(.text_entry*)
+		__bare_init_start = .;
+		*(.text_bare_init*)
+		__bare_init_end = .;
+		*(.text*)
+		. = ALIGN(4);
+		*(.rodata*)
+		. = ALIGN(4);
+		_etext = .;			/* End of text and rodata section */
+	} > barebox
+
 	_sdata = .;
 	.data : AT ( LOADADDR(.text) + SIZEOF(.text) ) {
 		*(.data*)
