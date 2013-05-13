@@ -126,7 +126,6 @@ class SetupMbrError:
     pass
 
 def fill_daps(sector, count, offset, segment, lba):
-    print("%u, %X" % (sector.start_offset, sector.start_offset))
     assert count < 128
     assert offset < 0x10000
     assert segment < 0x10000
@@ -206,7 +205,10 @@ def barebox_linear_image(hd_image, daps_table, size):
                 size = 0
                 i += 1
     else:
-        pass
+        rc = fill_daps(DAPS(hd_image, daps_table+i*len(DAPS)), size / SECTOR_SIZE, offset, segment, lba)
+        if not rc:
+            return False
+        i += 1
 
     if i >= (SECTOR_SIZE / len(DAPS)):
         return True
@@ -257,7 +259,7 @@ def barebox_overlay_mbr(fd_barebox, fd_hd):
 
     check_for_space(hd_image, required_size)
 
-    # embed barebox's boot code into the disk driver image
+    # embed barebox's boot code into the disk drive image
     hd_image[0:OFFSET_OF_PARTITION_TABLE] = barebox_image[0:OFFSET_OF_PARTITION_TABLE]
 
 	# embed the barebox main image into the disk drive image,
@@ -270,7 +272,6 @@ def barebox_overlay_mbr(fd_barebox, fd_hd):
 
     embed = PATCH_AREA
     indirect = SECTOR_SIZE
-    print("indirect: %u" % indirect)
 
     fill_daps(DAPS(hd_image, embed), 1, INDIRECT_AREA, INDIRECT_SEGMENT, 1)
 
@@ -288,7 +289,6 @@ def main():
                       help="")
     parser.add_option("-d", dest="hd_image_filename",
                       help="")
-    #parser.add_option("-v", 
 
     (options, args) = parser.parse_args()
 
