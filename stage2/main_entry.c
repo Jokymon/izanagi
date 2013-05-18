@@ -20,6 +20,7 @@
  */
 
 #include <string.h>
+#include <stdio.h>
 #include <asm/sections.h>
 
 extern void start_barebox(void);
@@ -36,12 +37,12 @@ void uboot_entry(void)
     // TODO: jump to Izanagi code
 	//start_barebox();
 
-    char* video = 0xb800;
-    video[0] = 'Y';
-    video[1] = 'e';
-    video[2] = 'e';
-    video[3] = 'a';
-    video[4] = 'a';
-    video[5] = 'h';
+    clrscr();
+    puts("Izanagi\n");
+    puts("==================================\n");
+    puts("\n");
+    puts("Version 0.1.0\n");
+    //gotoxy(7, 0);
+
     while(1) {}
 }

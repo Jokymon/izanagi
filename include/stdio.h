@@ -4,6 +4,8 @@
 #include <stdarg.h>
 #include <console.h>
 
+#define VIDEO_BASE_ADDRESS 0xb8000
+
 /*
  * STDIO based functions (can always be used)
  */
@@ -24,21 +26,15 @@ int	vscnprintf(char *buf, size_t size, const char *fmt, va_list args);
 int	tstc(void);
 
 /* stdout */
-void	console_putc(unsigned int ch, const char c);
-int	getc(void);
-int	console_puts(unsigned int ch, const char *s);
-void	console_flush(void);
+void    console_putc(unsigned int ch, const char c);
+int	    getc(void);
+void    console_flush(void);
 
 
 int	printf(const char *fmt, ...) __attribute__ ((format(__printf__, 1, 2)));
 int	vprintf(const char *fmt, va_list args);
 #else
 static inline int tstc(void)
-{
-	return 0;
-}
-
-static inline int console_puts(unsigned int ch, const char *str)
 {
 	return 0;
 }
@@ -74,20 +70,10 @@ static inline int ctrlc (void)
 
 #endif
 
-static inline int puts(const char *s)
-{
-	return console_puts(CONSOLE_STDOUT, s);
-}
-
-static inline void putchar(char c)
-{
-	console_putc(CONSOLE_STDOUT, c);
-}
-
-/* stderr */
-#define eputc(c)		console_putc(CONSOLE_STDERR, c)
-#define eputs(s)		console_puts(CONSOLE_STDERR, s)
-#define eprintf(fmt,args...)	fprintf(stderr,fmt ,##args)
+int puts(const char *s);
+void putchar(char c);
+void gotoxy(int x, int y);
+void clrscr();
 
 /*
  * FILE based functions
