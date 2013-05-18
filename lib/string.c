@@ -231,8 +231,8 @@ size_t strlen(const char * s)
 }
 #endif
 EXPORT_SYMBOL(strlen);
+#endif
 
-#ifndef __HAVE_ARCH_STRNLEN
 /**
  * strnlen - Find the length of a length-limited string
  * @s: The string to be sized
@@ -246,9 +246,8 @@ size_t strnlen(const char * s, size_t count)
 		/* nothing */;
 	return sc - s;
 }
-#endif
-EXPORT_SYMBOL(strnlen);
 
+#if 0
 #if 0
 #ifndef __HAVE_ARCH_STRDUP
 char * strdup(const char *s)

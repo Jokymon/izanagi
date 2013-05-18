@@ -10,9 +10,6 @@
  * STDIO based functions (can always be used)
  */
 
-/* serial stuff */
-void	serial_printf(const char *fmt, ...) __attribute__ ((format(__printf__, 1, 2)));
-
 int	sprintf(char *buf, const char *fmt, ...) __attribute__ ((format(__printf__, 2, 3)));
 int	snprintf(char *buf, size_t size, const char *fmt, ...) __attribute__ ((format(__printf__, 3, 4)));
 int	vsprintf(char *buf, const char *fmt, va_list args);
@@ -26,9 +23,7 @@ int	vscnprintf(char *buf, size_t size, const char *fmt, va_list args);
 int	tstc(void);
 
 /* stdout */
-void    console_putc(unsigned int ch, const char c);
 int	    getc(void);
-void    console_flush(void);
 
 
 int	printf(const char *fmt, ...) __attribute__ ((format(__printf__, 1, 2)));
@@ -44,15 +39,7 @@ static inline int getc(void)
 	return -EINVAL;
 }
 
-static inline void console_putc(unsigned int ch, char c) {}
-
-static inline void console_flush(void) {}
-
-static int printf(const char *fmt, ...) __attribute__ ((format(__printf__, 1, 2)));
-static inline int printf(const char *fmt, ...)
-{
-	return 0;
-}
+int printf(const char *fmt, ...);
 
 
 static inline int vprintf(const char *fmt, va_list args)

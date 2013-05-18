@@ -38,10 +38,11 @@ void uboot_entry(void)
 	//start_barebox();
 
     clrscr();
-    puts("Izanagi\n");
-    puts("==================================\n");
-    puts("\n");
-    puts("Version 0.1.0\n");
+    printf("Izanagi Version %u.%u\n", 1, 0);
+    printf("==================================\n");
+    printf("\n");
+    printf("Video base address: 0x%x", 0xb0000);
+
     //gotoxy(7, 0);
 
     while(1) {}
