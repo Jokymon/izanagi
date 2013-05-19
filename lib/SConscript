@@ -1,0 +1,8 @@
+Import('srcs')
+
+srcs.append("lib/ctype.c")
+srcs.append("lib/div64.c")
+srcs.append("lib/gdt.c")
+srcs.append("lib/stdio.c")
+srcs.append("lib/string.c")
+srcs.append("lib/vsprintf.c")

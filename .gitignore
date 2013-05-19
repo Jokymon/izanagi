@@ -1,4 +1,10 @@
 *.swp
 *.o
+*.lst
 *.bin
 *.elf
+*.exe
+
+*.img
+
+.sconsign.dblite

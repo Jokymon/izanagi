@@ -1,0 +1,9 @@
+Import('srcs')
+
+srcs.append("stage2/a20.c")
+srcs.append("stage2/bioscall.S")
+srcs.append("stage2/main_entry.c")
+srcs.append("stage2/pmjump.S")
+srcs.append("stage2/prepare_uboot.c")
+srcs.append("stage2/regs.c")
+srcs.append("stage2/tty.c")
