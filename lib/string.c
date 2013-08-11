@@ -40,8 +40,8 @@ char * strcpy(char * dest,const char *src)
 }
 #endif
 EXPORT_SYMBOL(strcpy);
+#endif
 
-#ifndef __HAVE_ARCH_STRNCPY
 /**
  * strncpy - Copy a length-limited, %NUL-terminated string
  * @dest: Where to copy the string to
@@ -61,9 +61,8 @@ char * strncpy(char * dest,const char *src,size_t count)
 
 	return tmp;
 }
-#endif
-EXPORT_SYMBOL(strncpy);
 
+#if 0
 #ifndef __HAVE_ARCH_STRLCPY
 /**
  * strlcpy - Copy a %NUL terminated string into a sized buffer
@@ -159,8 +158,8 @@ int strcmp(const char * cs,const char * ct)
 }
 #endif
 EXPORT_SYMBOL(strcmp);
+#endif
 
-#ifndef __HAVE_ARCH_STRNCMP
 /**
  * strncmp - Compare two length-limited strings
  * @cs: One string
@@ -179,9 +178,8 @@ int strncmp(const char * cs, const char * ct, size_t count)
 
 	return __res;
 }
-#endif
-EXPORT_SYMBOL(strncmp);
 
+#if 0
 #ifndef __HAVE_ARCH_STRCHR
 /**
  * strchr - Find the first occurrence of a character in a string
@@ -215,8 +213,8 @@ char * _strrchr(const char * s, int c)
 }
 #endif
 EXPORT_SYMBOL(_strrchr);
+#endif
 
-#ifndef __HAVE_ARCH_STRLEN
 /**
  * strlen - Find the length of a string
  * @s: The string to be sized
@@ -229,9 +227,6 @@ size_t strlen(const char * s)
 		/* nothing */;
 	return sc - s;
 }
-#endif
-EXPORT_SYMBOL(strlen);
-#endif
 
 /**
  * strnlen - Find the length of a length-limited string
@@ -423,10 +418,7 @@ void * memset(void * s,int c,size_t count)
 	return s;
 }
 #endif
-//EXPORT_SYMBOL(memset);
 
-#if 0
-#ifndef __HAVE_ARCH_MEMCPY
 /**
  * memcpy - Copy one area of memory to another
  * @dest: Where to copy to
@@ -445,9 +437,8 @@ void * memcpy(void * dest,const void *src,size_t count)
 
 	return dest;
 }
-#endif
-EXPORT_SYMBOL(memcpy);
 
+#if 0
 #ifndef __HAVE_ARCH_MEMMOVE
 /**
  * memmove - Copy one area of memory to another
