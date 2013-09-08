@@ -1,15 +1,21 @@
+import os
+
+if os.name=="nt":
+    tools_parts = ("i386-elf-", ".exe")
+else:
+    tools_parts = ("", "")
+
 allflags = "-include config.h -include include/generated/autoconf.h -Iinclude"
 asflags = "%s -I. -D__ASSEMBLY__ -c" % allflags
-cflags = "%s -fvisibility=default -fno-builtin -D__KERNEL__ " % allflags
+cflags = "%s -fvisibility=default -fno-builtin -fno-stack-protector -fno-asynchronous-unwind-tables -D__KERNEL__ " % allflags
 ldflags = "-nostdlib"
 
-gcc_path = Dir("E:/vm-shared/i386-elf/bin")
-asm = gcc_path.File("i386-elf-gcc.exe")
-gcc = gcc_path.File("i386-elf-gcc.exe")
-cpp = gcc_path.File("i386-elf-cpp.exe")
-ld  = gcc_path.File("i386-elf-ld.exe")
-objcopy = gcc_path.File("i386-elf-objcopy.exe")
-objdump = gcc_path.File("i386-elf-objdump.exe")
+asm = "%sgcc%s" % tools_parts
+gcc = "%sgcc%s" % tools_parts
+cpp = "%scpp%s" % tools_parts
+ld  = "%sld%s" % tools_parts
+objcopy = "%sobjcopy%s" % tools_parts
+objdump = "%sobjdump%s" % tools_parts
 
 env = Environment(
     AS = asm,
@@ -19,7 +25,10 @@ env = Environment(
     CCFLAGS = cflags,
     
     LINK = ld,
-    LINKFLAGS = ldflags)
+    LINKFLAGS = ldflags,
+
+    ENV = { 'PATH' : os.environ['PATH'] }
+)
 
 srcs = []
 
