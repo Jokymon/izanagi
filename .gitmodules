@@ -1,0 +1,3 @@
+[submodule "tools/pyvirtualfs"]
+	path = tools/pyvirtualfs
+	url = https://github.com/Jokymon/pyvirtualfs.git
