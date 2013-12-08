@@ -27,6 +27,8 @@ env = Environment(
     LINK = ld,
     LINKFLAGS = ldflags,
 
+    tools = ['mingw'],
+
     ENV = { 'PATH' : os.environ['PATH'] }
 )
 
