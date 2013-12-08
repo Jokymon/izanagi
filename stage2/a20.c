@@ -106,13 +106,13 @@ static void __bootcode enable_a20_kbc(void)
 {
 	empty_8042();
 
-	outb(0xd1, 0x64);	/* Command write */
+	outb(0x64, 0xd1);	/* Command write */
 	empty_8042();
 
-	outb(0xdf, 0x60);	/* A20 on */
+	outb(0x60, 0xdf);	/* A20 on */
 	empty_8042();
 
-	outb(0xff, 0x64);	/* Null command, but UHCI wants it */
+	outb(0x64, 0xff);	/* Null command, but UHCI wants it */
 	empty_8042();
 }
 
@@ -123,7 +123,7 @@ static void __bootcode enable_a20_fast(void)
 	port_a = inb(0x92);	/* Configuration port A */
 	port_a |=  0x02;	/* Enable A20 */
 	port_a &= ~0x01;	/* Do not reset machine */
-	outb(port_a, 0x92);
+	outb(0x92, port_a);
 }
 
 /*

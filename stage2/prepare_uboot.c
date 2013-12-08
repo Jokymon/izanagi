@@ -27,7 +27,7 @@ THIS_IS_REALMODE_CODE
 static void __bootcode realmode_switch_hook(void)
 {
 	asm volatile("cli");
-	outb(0x80, 0x70); /* Disable NMI */
+	outb(0x70, 0x80); /* Disable NMI */
 	io_delay();
 }
 
@@ -36,9 +36,9 @@ static void __bootcode realmode_switch_hook(void)
  */
 static void __bootcode reset_coprocessor(void)
 {
-	outb(0, 0xf0);
+	outb(0xf0, 0);
 	io_delay();
-	outb(0, 0xf1);
+	outb(0xf1, 0);
 	io_delay();
 }
 

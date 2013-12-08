@@ -12,17 +12,17 @@
 
 #include <asm/byteorder.h>
 
-static inline void outb(unsigned char value, int port)
+static inline void outb(int port, unsigned char value)
 {
 	asm volatile("outb %b0, %w1" : : "a"(value), "Nd"(port));
 }
 
-static inline void outw(unsigned short value, int port)
+static inline void outw(int port, unsigned short value)
 {
 	asm volatile("outw %w0, %w1" : : "a"(value), "Nd"(port));
 }
 
-static inline void outl(unsigned long value, int port)
+static inline void outl(int port, unsigned long value)
 {
 	asm volatile("outl %0, %w1" : : "a"(value), "Nd"(port));
 }
