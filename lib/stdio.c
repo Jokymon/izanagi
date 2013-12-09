@@ -15,7 +15,11 @@ int puts(const char *s)
 
 void putchar(char c)
 {
-    if (c=='\n')
+    if (c=='\r')
+    {
+        cursor_x = 0;
+    }
+    else if (c=='\n')
     {
         cursor_x = 0;
         cursor_y++;
