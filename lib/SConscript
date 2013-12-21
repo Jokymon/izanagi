@@ -1,8 +1,5 @@
-Import('srcs')
+Import('env static_libs')
 
-srcs.append("lib/ctype.c")
-srcs.append("lib/div64.c")
-srcs.append("lib/gdt.c")
-srcs.append("lib/stdio.c")
-srcs.append("lib/string.c")
-srcs.append("lib/vsprintf.c")
+base_sources = Glob('*.c')
+base = env.Library('base', base_sources)
+static_libs.append(base)

@@ -1,3 +1,5 @@
-Import('srcs')
+Import('env static_libs')
 
-srcs += Glob("*.c")
+drivers_srcs = Glob("*.c")
+drivers = env.Library('drivers', drivers_srcs)
+static_libs.append(drivers)
