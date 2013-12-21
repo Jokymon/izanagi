@@ -4,7 +4,10 @@
 *.bin
 *.elf
 *.exe
+lib*.a
 
 *.img
+
+barebox.lds
 
 .sconsign.dblite
