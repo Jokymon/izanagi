@@ -35,16 +35,23 @@ env = Environment(
 srcs = []
 static_libs = []
 
-SConscript(dirs=['stage2', 'lib', 'drivers'], exports='env static_libs')
+SConscript(dirs=['stage2', 'lib', 'drivers', 'external_libs'],
+           exports='env static_libs')
 
 srcs.append("boot_hdisk.S")
 srcs.append("boot_main.S")
 
-env.Command('barebox.lds', 'barebox.lds.S', "%s -P $SOURCE -I. -DTEXT_BASE=0x00007c00 -o $TARGET" % cpp)
+env.Command('barebox.lds',
+            'barebox.lds.S',
+            "%s -P $SOURCE -I. -DTEXT_BASE=0x00007c00 -o $TARGET" % cpp)
 
 izanagi = env.Program('izanagi', srcs,
                        LIBS=static_libs,
                        LINKFLAGS="-T barebox.lds")
 
-env.Command('izanagi.img', izanagi, "%s -I elf32-i386 -O binary $SOURCE $TARGET" % objcopy)
-env.Command('izanagi.lst', izanagi, "%s -S -mi386 -Maddr16,data16,intel $SOURCE > $TARGET" % objdump)
+env.Command('izanagi.img',
+            izanagi,
+            "%s -I elf32-i386 -O binary $SOURCE $TARGET" % objcopy)
+env.Command('izanagi.lst',
+            izanagi,
+            "%s -S -mi386 -Maddr16,data16,intel $SOURCE > $TARGET" % objdump)

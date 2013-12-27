@@ -1,0 +1,5 @@
+Import('env static_libs')
+
+fat_sources = Glob('fat_io_lib/fat*.c')
+fat = env.Library('fat_io_lib', fat_sources)
+static_libs.append(fat)
