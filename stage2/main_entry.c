@@ -22,6 +22,8 @@
 #include <string.h>
 #include <stdio.h>
 #include <asm/sections.h>
+#include <drivers/filesystem.h>
+#include <fat_io_lib/fat_filelib.h>
 
 extern void start_barebox(void);
 
@@ -42,6 +44,10 @@ void uboot_entry(void)
     printf("==================================\n");
     printf("\n");
     printf("Video base address: 0x%x", 0xb0000);
+
+    init_filesystem(0x0, 0);
+
+    fl_listdirectory("/");
 
     //gotoxy(7, 0);
 

@@ -5,7 +5,7 @@ if os.name=="nt":
 else:
     tools_parts = ("", "")
 
-allflags = "-include config.h -include include/generated/autoconf.h -Iinclude"
+allflags = "-include config.h -include include/generated/autoconf.h -Iinclude -Iexternal_libs"
 asflags = "%s -I. -D__ASSEMBLY__ -c" % allflags
 cflags = "%s -fvisibility=default -fno-builtin -fno-stack-protector -fno-asynchronous-unwind-tables -D__KERNEL__ " % allflags
 ldflags = "-nostdlib"
