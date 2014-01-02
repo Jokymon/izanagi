@@ -138,8 +138,8 @@ char * strncat(char *dest, const char *src, size_t count)
 }
 #endif
 EXPORT_SYMBOL(strncat);
+#endif
 
-#ifndef __HAVE_ARCH_STRCMP
 /**
  * strcmp - Compare two strings
  * @cs: One string
@@ -156,9 +156,6 @@ int strcmp(const char * cs,const char * ct)
 
 	return __res;
 }
-#endif
-EXPORT_SYMBOL(strcmp);
-#endif
 
 /**
  * strncmp - Compare two length-limited strings

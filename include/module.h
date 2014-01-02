@@ -5,6 +5,10 @@
 #include <linux/compiler.h>
 #include <linux/list.h>
 
+/* load a kernel image according to the information in the ELF program header
+ * sections. Return 1 on success and 0 on failure */
+int load_kernel_image(char* image_path);
+
 #ifndef MODULE_SYMBOL_PREFIX
 #define MODULE_SYMBOL_PREFIX
 #endif

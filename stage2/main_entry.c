@@ -22,8 +22,11 @@
 #include <string.h>
 #include <stdio.h>
 #include <asm/sections.h>
+#include <disks.h>
 #include <drivers/filesystem.h>
 #include <fat_io_lib/fat_filelib.h>
+
+#include <module.h>
 
 extern void start_barebox(void);
 
@@ -34,6 +37,8 @@ extern void start_barebox(void);
  */
 void uboot_entry(void)
 {
+    int result;
+
 	/* clear the BSS first */
 	memset(__bss_start, 0x00, __bss_stop - __bss_start);
     // TODO: jump to Izanagi code
@@ -47,9 +52,21 @@ void uboot_entry(void)
 
     init_filesystem(0x0, 0);
 
-    fl_listdirectory("/");
+#if 0
+    struct partition_entry* pt = (struct partition_entry*)(TEXT_BASE + 0x1BE);
 
-    //gotoxy(7, 0);
+    printf("Partition entry 0:\n");
+    printf("Bootable flag: 0x%x\n", pt->boot_indicator);
+    printf("Filesystem type: 0x%x\n", pt->type);
+    printf("Partition start: %u\n", pt->partition_start);
+    printf("Partition size: %u\n", pt->partition_size);
+#endif
+
+    result = load_kernel_image("/hirvi.elf");
+    if (0 == result)
+    {
+        printf("Loading kernel image failed: %d\n", result);
+    }
 
     while(1) {}
 }
