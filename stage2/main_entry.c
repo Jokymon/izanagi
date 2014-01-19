@@ -62,7 +62,7 @@ void uboot_entry(void)
     printf("Partition size: %u\n", pt->partition_size);
 #endif
 
-    result = load_kernel_image("/hirvi.elf");
+    result = load_kernel_image("/kernel.elf");
     if (0 == result)
     {
         printf("Loading kernel image failed: %d\n", result);
