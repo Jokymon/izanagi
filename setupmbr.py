@@ -28,6 +28,10 @@
 # - and maybe some others
 #
 
+import os.path
+
+script_path = os.path.dirname(__file__)
+
 def values2string(values):
     import sys
     if sys.version_info[0]==2:
@@ -43,7 +47,7 @@ def populate_globals_from_header(header_file):
             (variable, value) = line[len("#define"):].strip().split(" ")
             globals()[variable] = eval(value)
 
-populate_globals_from_header("barebox.lds.h")
+populate_globals_from_header(os.path.join(script_path, "barebox.lds.h"))
 
 class Field(object):
     def __init__(self, start, size):
@@ -282,7 +286,7 @@ def barebox_overlay_mbr(fd_barebox, fd_hd):
     hd_image.close()
     barebox_image.close()
 
-def main():
+def main(argv):
     from optparse import OptionParser
     parser = OptionParser()
     parser.add_option("-m", dest="barebox_image_filename",
@@ -290,7 +294,7 @@ def main():
     parser.add_option("-d", dest="hd_image_filename",
                       help="")
 
-    (options, args) = parser.parse_args()
+    (options, args) = parser.parse_args(argv)
 
     fd_barebox_image = open(options.barebox_image_filename, "r+b")
     fd_hd_image = open(options.hd_image_filename, "a+b")
@@ -301,4 +305,5 @@ def main():
     fd_hd_image.close()
 
 if __name__=="__main__":
-    main()
+    import sys
+    main(sys.argv[1:])
