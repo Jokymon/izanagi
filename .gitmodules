@@ -1,6 +1,0 @@
-[submodule "tools/pyvirtualfs"]
-	path = tools/pyvirtualfs
-	url = https://github.com/Jokymon/pyvirtualfs.git
-[submodule "external_libs/fat_io_lib"]
-	path = external_libs/fat_io_lib
-	url = https://github.com/Jokymon/fat_io_lib.git
