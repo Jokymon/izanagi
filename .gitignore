@@ -4,6 +4,7 @@
 *.bin
 *.elf
 *.exe
+*.pyc
 lib*.a
 
 *.img
@@ -11,3 +12,4 @@ lib*.a
 barebox.lds
 
 .sconsign.dblite
+/Build
